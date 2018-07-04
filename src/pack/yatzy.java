@@ -4,12 +4,13 @@ import java.util.*;
 
 public class yatzy {
 
-
         static int nrOfDice = 5;
         static int nrOfDieValues = 6;
         static boolean miniMenu = false;
         static int userInput = 0;
         static int[] dice = {nrOfDice};
+
+
 
 
 
@@ -32,7 +33,7 @@ public class yatzy {
             Scanner inputUserchoice = new Scanner(System.in);
 
             if (miniMenu == false) {
-                
+
                 System.out.println("\nMENU:");
                 System.out.println("0. Display the menu:");
                 System.out.println("1. Make a random throw");
@@ -46,13 +47,12 @@ public class yatzy {
 
                 miniMenu = true;
 
-            }
-
-            else {
+            }else {
                 System.out.println("");
                 System.out.print("\nMake your choice: ");
                 userInput = inputUserchoice.nextInt();
             }
+
 
             switch (userInput) {
                 case 0:
@@ -161,6 +161,12 @@ public class yatzy {
             }else if(isSmallStraight(dice, nrOfDieValues) == 0){
                 System.out.println("No small straight");
             }
+
+            if(isLargeStraight(dice, nrOfDieValues)==1) {
+                System.out.println("Large Straight : 20 points");
+            }else if(isLargeStraight(dice, nrOfDieValues) == 0){
+                System.out.println("No large straight");
+            }
         }
 
         static int isFourOfAkind(int dieValues[], int nrOfDieValues) {
@@ -204,6 +210,14 @@ public class yatzy {
             Arrays.sort(sortedArr);
             return Arrays.equals(smallStraight, sortedArr) ? 1 : 0;
         }
+
+        static int isLargeStraight(int dieValues[], int nrOfDieValue) {
+            int[] sortedArr = (int[])dieValues.clone();
+            int[] smallStraight = new int[]{2, 3, 4, 5, 6};
+            Arrays.sort(sortedArr);
+            return Arrays.equals(smallStraight, sortedArr) ? 1 : 0;
+        }
+
 
     }
 

@@ -1,6 +1,8 @@
 package pack;
 
+import java.lang.reflect.Array;
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class yatzy {
 
@@ -40,7 +42,7 @@ public class yatzy {
                 System.out.println("2. Enter die values for a throw");
                 System.out.println("3. Display the die values for the throw");
                 System.out.println("4. Display the score for the throw");
-                System.out.println("-1. End program" + " \n");
+                System.out.println("-1. End program");
 
                 System.out.print("\n" + "Make your choice: ");
                 userInput = inputUserchoice.nextInt();
@@ -167,6 +169,13 @@ public class yatzy {
             }else if(isLargeStraight(dice, nrOfDieValues) == 0){
                 System.out.println("No large straight");
             }
+
+            if(isAllSame(dice, nrOfDieValues) != 0) {
+                System.out.println("All the same! the no. are : " + isAllSame(dice, nrOfDieValues));
+
+            }else if(isLargeStraight(dice, nrOfDieValues) == 0){
+                System.out.println("Not all the same!");
+            }
         }
 
         static int isFourOfAkind(int dieValues[], int nrOfDieValues) {
@@ -176,7 +185,7 @@ public class yatzy {
                         for (int k = j+1; k < dieValues.length; k++) {
                             if(dieValues[j] == dieValues[k]) {
                                 for (int l=k+1; l < dieValues.length; l++) {
-                                    if(dieValues[k] == dieValues[l]) {
+                                    if(dieValues[k] == dieValues[l] && isAllSame(dice, nrOfDieValues) == 0) {
                                         return dieValues[l];
                                     }
                                 }
@@ -194,7 +203,7 @@ public class yatzy {
                  for (int j = i+1 ; j < dieValues.length; j++ ) {
                      if(dieValues[i] == dieValues[j]) {
                          for (int k = j+1; k < dieValues.length; k++) {
-                             if((dieValues[j] == dieValues[k]) && isFourOfAkind(dice, nrOfDieValues)==0) {
+                             if((dieValues[j] == dieValues[k]) && isFourOfAkind(dice, nrOfDieValues) == 0 && isAllSame(dice, nrOfDieValues) == 0) {
                                  return dieValues[i];
                              }
                          }
@@ -219,6 +228,17 @@ public class yatzy {
         }
 
 
+        static int isAllSame(int dieValues[], int nrOfDieValues) {
+
+            // Solution presented after JAVA 8
+            boolean contains = IntStream.of(dieValues).allMatch(x -> x == dieValues[0]);
+
+            if(contains){
+            //if (dieValues[0] == dieValues[1] && dieValues[0] == dieValues[2] && dieValues[0] == dieValues[3] && dieValues[0] == dieValues[4]) {
+                return dieValues[0];
+            }
+        return 0;
+        }
     }
 
 

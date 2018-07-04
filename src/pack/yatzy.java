@@ -32,9 +32,7 @@ public class yatzy {
             Scanner inputUserchoice = new Scanner(System.in);
 
             if (miniMenu == false) {
-
-
-
+                
                 System.out.println("\nMENU:");
                 System.out.println("0. Display the menu:");
                 System.out.println("1. Make a random throw");
